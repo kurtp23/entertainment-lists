@@ -15,24 +15,31 @@ function displayBooks() {
         item = res.items[i];
         title = item.volumeInfo.title;
         author = item.volumeInfo.authors;
-        // img = item.volumeInfo.imageLinks.thumbnail;
 
         item2 = res.items[i + 1];
         title2 = item2.volumeInfo.title;
         author2 = item2.volumeInfo.authors;
 
         console.log(item);
-        console.log(title);
-        console.log(author);
+        // console.log(title);
+        // console.log(author);
+        console.log(item2);
+        // console.log(title2);
+        // console.log(author2);
 
         var div = $("<div>");
         //   var respond = JSON.stringify(item);
         var titleEl$ = $("<p>").html(JSON.stringify(item.volumeInfo.title));
         var authorEl$ = $("<p>").html(JSON.stringify(item.volumeInfo.authors));
+        var imageLink = item.volumeInfo.imageLinks.thumbnail;
+        console.log(imageLink);
+        console.log(image2Link);
+        var imgEl$ = $("<img>").attr("src", imageLink);
         var title2El$ = $("<p>").html(JSON.stringify(item2.volumeInfo.title));
         var author2El$ = $("<p>").html(JSON.stringify(item2.volumeInfo.authors));
-
-        $(div).append(titleEl$, authorEl$, title2El$, author2El$);
+        var image2Link = item2.volumeInfo.imageLinks.thumbnail;
+        var img2El$ = $("<img>").attr("src", image2Link);
+        $(div).append(titleEl$, authorEl$, imgEl$, title2El$, author2El$, img2El$);
       }
 
       $(".results").html(div);
