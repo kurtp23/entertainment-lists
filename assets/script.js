@@ -86,9 +86,3 @@ $("#list").on("click", function () {
 
   $(".results").html(contain);
 });
-
-function test(){
-alert('hi');
-}
-
-test();
