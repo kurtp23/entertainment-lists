@@ -64,12 +64,20 @@ function displayGames() {
 
   $.ajax(settings).then(function (response) {
     console.log(response);
-    console.log(response.results[0].name);
-    var div = $("<div>");
-    var titleEl$ = $("<p>").html(response.results[0].name);
-    var imgEl$ = $("<img id='gameImg'>").attr("src", response.results[0].background_image);
-    $(div).append(titleEl$,imgEl$);
-    $(".results").html(div);
+    var container = $("<div id='container'>");
+    for (let i = 0; i < response.results.length; i++) {
+      var div = $("<div>");
+      var titleEl$ = $("<p>").html(response.results[i].name);
+      console.log(titleEl$);
+      var imgEl$ = $("<img id='gameImg'>").attr("src", response.results[i].background_image);
+      console.log(imgEl$);
+      var ratingsEl$ = $("<p>").html("Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top);
+      console.log(ratingsEl$);
+      var releasedEl$ = $("<p>").html("Released in(Y-M-D): " + response.results[i].released);
+      console.log(releasedEl$);
+      $(div).append(titleEl$, imgEl$, ratingsEl$, releasedEl$);
+      $(".results").html(container.append(div));
+    }
   });
 }
 
