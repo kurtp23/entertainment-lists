@@ -11,20 +11,25 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/style.css" />
+    <!-- <link rel="stylesheet" href="assets/style.css" /> -->
   </head>
-  <body>
+  <body class = "blue lighten-3">
     <!-- constainer div  -->
-    <div class="container">
+    <nav>
+    <div class="nav-wrapper teal lighten-2"></div>
       <!-- left column that holds the different search options -->
-      <div id="colLeft">
-        <div id="topRow"><button id="books">books</button></div>
-        <div id="bottomRow"><button id="movies">movies</button></div>
-        <div id="bottomRow2"><button id="videoGames">video games</button></div>
-        <div id="bottomRow3"><button id="list">My Lists</button></div>
+    </div>
+  </nav>
+  <div class = 'row'></div>
+      <div class="row">
+      <div id="colLeft" class="col s3 deep-purple lighten-3">
+        <div id="topRow"><button class="waves-effect amber lighten-4 btn "id="books">books</button></div>
+        <div id="bottomRow"><button class="waves-effect amber lighten-4 btn" id="movies">movies</button></div>
+        <div id="bottomRow2"><button class="waves-effect amber lighten-4 btn" id="videoGames">video games</button></div>
+        <div id="bottomRow3"><button class="waves-effect amber lighten-4 btn" id="list">My Lists</button></div>
       </div>
       <!-- div for input and search results -->
-      <div class="results"></div>
+      <div class="results col s9"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
