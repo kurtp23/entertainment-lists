@@ -1,7 +1,10 @@
 var key = "AIzaSyDTBCUxVbL39WQeQqdnu6uFJ5t5a2989_s";
 var search = "";
 queryURL = "https://www.googleapis.com/books/v1/volumes?q=";
-queryURLTwo = "https://rawg-video-games-database.p.rapidapi.com/games?search=" + search + "a688fc83bamsh46670efb1f6f6d4p1aabd2jsncc1d3e1bf328"
+queryURLTwo =
+  "https://rawg-video-games-database.p.rapidapi.com/games?search=" +
+  search +
+  "a688fc83bamsh46670efb1f6f6d4p1aabd2jsncc1d3e1bf328";
 // function to search through books
 function displayBooks() {
   search = $("#search").val().trim();
@@ -11,55 +14,27 @@ function displayBooks() {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-    function results(res) {
-      for (let i = 0; i < res.items.length; i += 2) {
-        item = res.items[i];
-        title = item.volumeInfo.title;
-        author = item.volumeInfo.authors;
+    console.log(response.items.length);
+    for (let item of response.items) {
+      console.log("hello");
+      // item = response.items[i];
 
-        item2 = res.items[i + 1];
-        title2 = item2.volumeInfo.title;
-        author2 = item2.volumeInfo.authors;
-
-        console.log(item);
-        // console.log(title);
-        // console.log(author);
-        console.log(item2);
-        // console.log(title2);
-        // console.log(author2);
-
-        var div = $("<div>");
-        //   var respond = JSON.stringify(item);
-        var titleEl$ = $("<p>").html(JSON.stringify(item.volumeInfo.title));
-        var authorEl$ = $("<p>").html(JSON.stringify(item.volumeInfo.authors));
-        var imageLink = item.volumeInfo.imageLinks.thumbnail;
-        console.log(imageLink);
-        console.log(image2Link);
-        var imgEl$ = $("<img id='bookImg'>").attr("src", imageLink);
-        var title2El$ = $("<p>").html(JSON.stringify(item2.volumeInfo.title));
-        var author2El$ = $("<p>").html(JSON.stringify(item2.volumeInfo.authors));
-        var image2Link = item2.volumeInfo.imageLinks.thumbnail;
-        var img2El$ = $("<img id='bookImg'>").attr("src", image2Link);
-        $(div).append(titleEl$, authorEl$, imgEl$, title2El$, author2El$, img2El$);
-      }
-
-      $(".results").html(div);
+      displayCards(item);
     }
-    results(response);
   });
 }
 
 function displayGames() {
   search = $("#search").val().trim();
   const settings = {
-	  "async": true,
-	  "crossDomain": true,
-	  "url": "https://rawg-video-games-database.p.rapidapi.com/games?search=" + search,
-	  "method": "GET",
-	  "headers": {
-		  "x-rapidapi-key": "a688fc83bamsh46670efb1f6f6d4p1aabd2jsncc1d3e1bf328",
-		  "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com"
-	  }
+    async: true,
+    crossDomain: true,
+    url: "https://rawg-video-games-database.p.rapidapi.com/games?search=" + search,
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": "a688fc83bamsh46670efb1f6f6d4p1aabd2jsncc1d3e1bf328",
+      "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
+    },
   };
 
   $.ajax(settings).then(function (response) {
@@ -71,7 +46,9 @@ function displayGames() {
       console.log(titleEl$);
       var imgEl$ = $("<img id='gameImg'>").attr("src", response.results[i].background_image);
       console.log(imgEl$);
-      var ratingsEl$ = $("<p>").html("Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top);
+      var ratingsEl$ = $("<p>").html(
+        "Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top
+      );
       console.log(ratingsEl$);
       var releasedEl$ = $("<p>").html("Released in(Y-M-D): " + response.results[i].released);
       console.log(releasedEl$);
@@ -120,3 +97,24 @@ $("#list").on("click", function () {
 
   $(".results").html(contain);
 });
+
+function displayCards(cardInfo) {
+  console.log(cardInfo);
+  var cardHtml = `
+  <div class="row">
+  <div class="col s12 m3">
+    <div class="card">
+      <div class="card-image">
+        <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
+        
+        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+      </div>
+      <div class="card-content">
+        <p>${cardInfo.volumeInfo.authors ? cardInfo.volumeInfo.authors.join(", ") : "no author"}</p>
+        <p>${cardInfo.volumeInfo.title}<p>
+      </div>
+    </div>
+  </div>`;
+
+  $(".results").append(cardHtml);
+}
