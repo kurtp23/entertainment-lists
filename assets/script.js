@@ -103,19 +103,24 @@ $("#list").on("click", function () {
 function displayCards(cardInfo) {
   console.log(cardInfo);
   var cardHtml = `
-  
   <div class="col s3 m3">
-    <div class="card">
-      <div class="card-image">
-        <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
-        
-        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
-      <div class="card-content">
-        <p>${cardInfo.volumeInfo.authors ? cardInfo.volumeInfo.authors.join(", ") : "no author"}</p>
-        <p>${cardInfo.volumeInfo.title}<p>
-      </div>
-    </div>
+  <div class="card ">
+  <div class="card-image">
+  <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">Book Info<i class="material-icons right">more_vert</i></span>
+    
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">${
+      cardInfo.volumeInfo.title
+    }<i class="material-icons right">close</i></span>
+    <p>${cardInfo.volumeInfo.authors ? cardInfo.volumeInfo.authors.join(", ") : "no author"}</p>
+  </div>
+</div>
+</div>
+          
   `;
 
   $(".results").append(cardHtml);
