@@ -15,8 +15,10 @@ function displayBooks() {
   }).then(function (response) {
     console.log(response);
     console.log(response.items.length);
+
     for (let item of response.items) {
       console.log("hello");
+
       // item = response.items[i];
 
       displayCards(item);
@@ -61,7 +63,7 @@ function displayGames() {
 // click handler to run when add input and search button when clicked
 $("#books").on("click", function () {
   var searchDiv = $("<div>");
-  var inputField = $("<input>search</input>").attr("id", "search");
+  var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $("<button>search books</button>").attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
@@ -71,7 +73,7 @@ $("#books").on("click", function () {
 // click handler to run when add input and search button when clicked
 $("#movies").on("click", function () {
   var searchDiv = $("<div>");
-  var inputField = $("<input>search</input>").attr("id", "search");
+  var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $("<button>search movies</button>").attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
@@ -81,7 +83,7 @@ $("#movies").on("click", function () {
 // click handler to run when add input and search button when clicked
 $("#videoGames").on("click", function () {
   var searchDiv = $("<div>");
-  var inputField = $("<input>search</input>").attr("id", "search");
+  var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $("<button>search video games</button>").attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
@@ -101,8 +103,8 @@ $("#list").on("click", function () {
 function displayCards(cardInfo) {
   console.log(cardInfo);
   var cardHtml = `
-  <div class="row">
-  <div class="col s12 m3">
+  
+  <div class="col s3 m3">
     <div class="card">
       <div class="card-image">
         <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
@@ -114,7 +116,7 @@ function displayCards(cardInfo) {
         <p>${cardInfo.volumeInfo.title}<p>
       </div>
     </div>
-  </div>`;
+  `;
 
   $(".results").append(cardHtml);
 }
