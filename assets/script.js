@@ -66,7 +66,7 @@ function displayGames() {
 $("#books").on("click", function () {
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $("<button>search books</button>").attr("id", "searchBtn");
+  var searchButton = $("<button class = 'waves-effect deep-orange lighten-4 btn'>search books</button>").attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
   // runs google books api function to search through books
@@ -76,7 +76,7 @@ $("#books").on("click", function () {
 $("#movies").on("click", function () {
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $("<button>search movies</button>").attr("id", "searchBtn");
+  var searchButton = $("<button class = 'waves-effect deep-orange lighten-4 btn'>search movies</button>").attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
 
@@ -86,7 +86,7 @@ $("#movies").on("click", function () {
 $("#videoGames").on("click", function () {
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $("<button>search video games</button>").attr("id", "searchBtn");
+  var searchButton = $("<button class = 'waves-effect deep-orange lighten-4 btn'>search video games</button>").attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
 
