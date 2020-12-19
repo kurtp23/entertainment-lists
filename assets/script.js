@@ -1,10 +1,6 @@
 var key = "AIzaSyDTBCUxVbL39WQeQqdnu6uFJ5t5a2989_s";
 var search = "";
 queryURL = "https://www.googleapis.com/books/v1/volumes?q=";
-queryURLTwo =
-  "https://rawg-video-games-database.p.rapidapi.com/games?search=" +
-  search +
-  "a688fc83bamsh46670efb1f6f6d4p1aabd2jsncc1d3e1bf328";
 // function to search through books
 function displayBooks() {
   search = $("#search").val().trim();
@@ -43,19 +39,25 @@ function displayGames() {
     console.log(response);
     var container = $("<div id='container'>");
     for (let i = 0; i < response.results.length; i++) {
-      var div = $("<div>");
-      var titleEl$ = $("<p>").html(response.results[i].name);
-      console.log(titleEl$);
-      var imgEl$ = $("<img id='gameImg'>").attr("src", response.results[i].background_image);
-      console.log(imgEl$);
-      var ratingsEl$ = $("<p>").html(
-        "Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top
-      );
-      console.log(ratingsEl$);
-      var releasedEl$ = $("<p>").html("Released in(Y-M-D): " + response.results[i].released);
-      console.log(releasedEl$);
-      $(div).append(titleEl$, imgEl$, ratingsEl$, releasedEl$);
-      $(".results").html(container.append(div));
+      var cardHtml = `
+      <div class="col s3 m3">
+        <div class="card ">
+          <div class="card-image">
+            <img id="gameImg" src="${response.results[i].background_image}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Game info<i class="material-icons right">more_vert</i></span>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">${response.results[i].name}<i class="material-icons right">close</i></span>
+          <p>${"Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top}</p>
+          <p>${"Released in(Y-M-D): " + response.results[i].released}<p>
+          </div>
+        </div>
+      </div>   
+  `;
+
+  $(".results").append(cardHtml);
     }
   });
 }
