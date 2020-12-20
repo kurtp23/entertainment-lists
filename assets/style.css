@@ -27,3 +27,15 @@
   width: 30%;
   align-self: center;
 }
+
+#movieImg {
+  height: 192px;
+  width: 128px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #555;
+}
+
+
+
