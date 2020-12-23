@@ -111,6 +111,20 @@ $('#booksDropdown').click(function(){
   $('body').append(booksHtml)
 })
 
+$('#moviesDropdown').click(function(){
+  var moviesHtml = `
+  <h3>My Movies</h3>
+  `
+  $('body').append(moviesHtml)
+})
+
+$('#videoGamesDropdown').click(function(){
+  var videoGamesHtml = `
+  <h3>My Video Games</h3>
+  `
+  $('body').append(videoGamesHtml)
+})
+
 function displayCards(cardInfo) {
   console.log(cardInfo);
   var cardHtml = `
