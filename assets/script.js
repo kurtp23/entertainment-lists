@@ -102,6 +102,8 @@ $("#list").on("click", function () {
   $(".results").html(contain);
 });
 
+$('.dropdown-trigger').dropdown();
+
 function displayCards(cardInfo) {
   console.log(cardInfo);
   var cardHtml = `
