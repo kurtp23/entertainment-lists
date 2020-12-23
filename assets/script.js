@@ -94,9 +94,9 @@ $("#videoGames").on("click", function () {
 });
 // adds 3 divs for each list
 $("#list").on("click", function () {
-  var div1 = $("<div>").html("books");
-  var div2 = $("<div>").html("movies");
-  var div3 = $("<div>").html("video games");
+  var div1 = $("<div>").html("");
+  var div2 = $("<div>").html("");
+  var div3 = $("<div>").html("");
   var contain = $("<div>").append(div1, div2, div3);
 
   $(".results").html(contain);
@@ -104,16 +104,24 @@ $("#list").on("click", function () {
 
 $('.dropdown-trigger').dropdown();
 
+$('#booksDropdown').click(function(){
+  var booksHtml = `
+  <h3>My Books</h3>
+  `
+  $('body').append(booksHtml)
+})
+
 function displayCards(cardInfo) {
   console.log(cardInfo);
   var cardHtml = `
   <div class="col s3 m3">
   <div class="card ">
   <div class="card-image">
+  <a class="btn-floating btn-large waves-effect deep-orange lighten-4"><i class="material-icons">add</i></a>
   <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
   </div>
   <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4">Book Info<i class="material-icons right">more_vert</i></span>
+    <span class="card-title activator grey-text text-darken-4" style = 'padding-left: 10%'>Book Info<i class="material-icons right">more_vert</i></span>
     
   </div>
   <div class="card-reveal">
