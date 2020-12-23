@@ -43,32 +43,53 @@ function displayGames() {
 
   $.ajax(settings).then(function (response) {
     console.log(response);
-    var container = $("<div id='container'>");
-    for (let i = 0; i < response.results.length; i++) {
-      var cardHtml = `
-      <div class="col s3 m3">
-        <div class="card ">
-          <div class="card-image">
-            <img id="gameImg" src="${response.results[i].background_image}">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Game info<i class="material-icons right">more_vert</i></span>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">${
-              response.results[i].name
-            }<i class="material-icons right">close</i></span>
-          <p>${
-            "Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top
-          }</p>
-          <p>${"Released in(Y-M-D): " + response.results[i].released}<p>
-          </div>
-        </div>
-      </div>   
-  `;
+    response.results.forEach(function (value, index) {
+      displayGameCards(value, index);
+    });
+    $(".save1").on("click", function () {
+      var newSave = response.results[$(this).attr("data-id")];
 
-      $(".results").append(cardHtml);
-    }
+      console.log(newSave);
+
+      myLists.videoGames.push(JSON.stringify(newSave));
+
+      localStorage.setItem("listsObj", JSON.stringify(myLists));
+      console.log(myLists);
+    });
+  });
+}
+const queryURL3 = "https://www.omdbapi.com/?s=";
+const key3 = "&apikey=trilogy";
+var movieTitle = "";
+
+// console.log(queryURL3 + movieTitle + key3);
+
+//-------------------------------------------------------
+
+// Function to search for movies
+
+function displayMovies() {
+  movieTitle = $("#search").val().trim();
+  // console.log($("#search").val().trim());
+
+  //Executes search command
+  $.ajax({
+    url: queryURL3 + movieTitle + key3,
+    method: "GET",
+  }).then(function (response) {
+    response.Search.forEach(function (value, index) {
+      displayMovieCards(value, index);
+    });
+    $(".save1").on("click", function () {
+      var newSave = response.Search[$(this).attr("data-id")];
+
+      console.log(newSave);
+
+      myLists.movies.push(JSON.stringify(newSave));
+
+      localStorage.setItem("listsObj", JSON.stringify(myLists));
+      console.log(myLists);
+    });
   });
 }
 
@@ -144,55 +165,63 @@ function displayCards(cardInfo, id) {
 
   $(".results").append(cardHtml);
 }
-
-//========================================================
-const queryURL3 = "https://www.omdbapi.com/?s=";
-const key3 = "&apikey=trilogy";
-var movieTitle = "";
-
-// console.log(queryURL3 + movieTitle + key3);
-
-//-------------------------------------------------------
-
-// Function to search for movies
-
-function displayMovies() {
-  movieTitle = $("#search").val().trim();
-  // console.log($("#search").val().trim());
-
-  //Executes search command
-  $.ajax({
-    url: queryURL3 + movieTitle + key3,
-    method: "GET",
-  }).then(function (response) {
-    console.log(response);
-    // $("#search").text(JSON.stringify(response));
-    for (j = 0; j < response.Search.length; j++) {
-      var cardHtml = `
-    <div class="col s3 m3">
-      <div class="card ">
-        <div class="card-image">
-          <img id="movieImg" src="${response.Search[j].Poster}">
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">Movie Info<i class="material-icons right">more_vert</i></span>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">${response.Search[j].Title}<i class="material-icons right">close</i></span>
-      
-        </div>
-      </div>
-    </div>   
+function displayGameCards(cardInfo, id) {
+  // console.log(cardInfo);
+  var cardHtml = `
+  <div class="col s3 m3">
+  <div class="card ">
+  <div class="card-image">
+  <img id="gameImg" src="${cardInfo.background_image}">
+ 
+  <a class="btn-floating halfway-fab waves-effect waves-light red save1"data-id="${id}"><i class="material-icons">add</i></a>
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">Game Info<i class="material-icons right">more_vert</i></span>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">${
+      cardInfo.name
+    }<i class="material-icons right">close</i></span>
+    <p>${"Rating is: " + cardInfo.rating + " out of " + cardInfo.rating_top}</p>
+  </div>
+</div>
+</div>
+          
   `;
 
-      $(".results").append(cardHtml);
-    }
-  });
+  $(".results").append(cardHtml);
 }
+function displayMovieCards(cardInfo, id) {
+  // console.log(cardInfo);
+  var cardHtml = `
+  <div class="col s3 m3">
+  <div class="card ">
+  <div class="card-image">
+  <img id="movieImg" src="${cardInfo.Poster}">
+ 
+  <a class="btn-floating halfway-fab waves-effect waves-light red save1"data-id="${id}"><i class="material-icons">add</i></a>
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">Movie Info<i class="material-icons right">more_vert</i></span>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">${cardInfo.Title}<i class="material-icons right">close</i></span>
+    <p></p>
+  </div>
+</div>
+</div>
+          
+  `;
+
+  $(".results").append(cardHtml);
+}
+
+//========================================================
+
 const lists = {
   books: [],
-  movies: { item2: "" },
-  videoGames: { item3: "" },
+  movies: [],
+  videoGames: [],
 };
 if (localStorage.getItem("listsObj") === null) {
   localStorage.setItem("listsObj", JSON.stringify(lists));
