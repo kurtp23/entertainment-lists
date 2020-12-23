@@ -9,16 +9,21 @@ function displayBooks() {
     url: queryURL + search,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
-    console.log(response.items.length);
+    console.log("books", response);
+    // console.log(response.items.length);
 
-    for (let item of response.items) {
-      console.log("hello");
+    response.items.forEach(function (value, index) {
+      displayCards(value, index);
+      $("#resultsContainer").on("click", ".save1", function () {
+        var newSave = response.items[$(this).attr("data-id")];
 
-      // item = response.items[i];
+        console.log(newSave);
 
-      displayCards(item);
-    }
+        myLists.books += newSave;
+
+        localStorage.setItem("listsObj", JSON.stringify(myLists));
+      });
+    });
   });
 }
 
@@ -49,15 +54,19 @@ function displayGames() {
             <span class="card-title activator grey-text text-darken-4">Game info<i class="material-icons right">more_vert</i></span>
           </div>
           <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">${response.results[i].name}<i class="material-icons right">close</i></span>
-          <p>${"Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top}</p>
+            <span class="card-title grey-text text-darken-4">${
+              response.results[i].name
+            }<i class="material-icons right">close</i></span>
+          <p>${
+            "Rating is: " + response.results[i].rating + " out of " + response.results[i].rating_top
+          }</p>
           <p>${"Released in(Y-M-D): " + response.results[i].released}<p>
           </div>
         </div>
       </div>   
   `;
 
-  $(".results").append(cardHtml);
+      $(".results").append(cardHtml);
     }
   });
 }
@@ -66,7 +75,9 @@ function displayGames() {
 $("#books").on("click", function () {
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $("<button class = 'waves-effect deep-orange lighten-4 btn'>search books</button>").attr("id", "searchBtn");
+  var searchButton = $(
+    "<button class = 'waves-effect deep-orange lighten-4 btn'>search books</button>"
+  ).attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
   // runs google books api function to search through books
@@ -76,7 +87,9 @@ $("#books").on("click", function () {
 $("#movies").on("click", function () {
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $("<button class = 'waves-effect deep-orange lighten-4 btn'>search movies</button>").attr("id", "searchBtn");
+  var searchButton = $(
+    "<button class = 'waves-effect deep-orange lighten-4 btn'>search movies</button>"
+  ).attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
 
@@ -86,7 +99,9 @@ $("#movies").on("click", function () {
 $("#videoGames").on("click", function () {
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $("<button class = 'waves-effect deep-orange lighten-4 btn'>search video games</button>").attr("id", "searchBtn");
+  var searchButton = $(
+    "<button class = 'waves-effect deep-orange lighten-4 btn'>search video games</button>"
+  ).attr("id", "searchBtn");
   $(searchDiv).append(inputField, searchButton);
   $(".results").html(searchDiv);
 
@@ -102,17 +117,18 @@ $("#list").on("click", function () {
   $(".results").html(contain);
 });
 
-function displayCards(cardInfo) {
-  console.log(cardInfo);
+function displayCards(cardInfo, id) {
+  // console.log(cardInfo);
   var cardHtml = `
   <div class="col s3 m3">
   <div class="card ">
   <div class="card-image">
   <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
+ 
+  <a class="btn-floating halfway-fab waves-effect waves-light red save1"data-id="${id}"><i class="material-icons">add</i></a>
   </div>
   <div class="card-content">
     <span class="card-title activator grey-text text-darken-4">Book Info<i class="material-icons right">more_vert</i></span>
-    
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">${
@@ -133,26 +149,25 @@ const queryURL3 = "https://www.omdbapi.com/?s=";
 const key3 = "&apikey=trilogy";
 var movieTitle = "";
 
-console.log(queryURL3+movieTitle+key3);
+// console.log(queryURL3 + movieTitle + key3);
 
 //-------------------------------------------------------
 
 // Function to search for movies
 
-function displayMovies(){
-    movieTitle = $("#search").val().trim();
+function displayMovies() {
+  movieTitle = $("#search").val().trim();
   // console.log($("#search").val().trim());
-  
+
   //Executes search command
   $.ajax({
     url: queryURL3 + movieTitle + key3,
-    method: "GET"
-  }).then(function(response){
-    // $("#search").text(JSON.stringify(response));
-    for (j = 0; j < response.Search.length; j++){
+    method: "GET",
+  }).then(function (response) {
     console.log(response);
-
-  var cardHtml = `
+    // $("#search").text(JSON.stringify(response));
+    for (j = 0; j < response.Search.length; j++) {
+      var cardHtml = `
     <div class="col s3 m3">
       <div class="card ">
         <div class="card-image">
@@ -169,9 +184,46 @@ function displayMovies(){
     </div>   
   `;
 
-$(".results").append(cardHtml);
+      $(".results").append(cardHtml);
     }
   });
-  
 }
+const lists = {
+  books: [],
+  movies: { item2: "" },
+  videoGames: { item3: "" },
+};
+if (localStorage.getItem("listsObj") === null) {
+  localStorage.setItem("listsObj", JSON.stringify(lists));
+}
+const myLists = JSON.parse(localStorage.getItem("listsObj"));
+console.log(myLists);
+// console.log(myLists);
 
+// $(".save1").on("click", function () {
+//   var newSave = 1234;
+
+//   console.log(newSave);
+
+//   myLists.books.item1 += newSave;
+//   // var blockText = storageBlocks[blockKey];
+//   // console.log(blockText);
+
+//   localStorage.setItem("listsObj", JSON.stringify(myLists));
+// });
+
+// $("#resultsContainer").on("click", ".save1", function () {
+//   var newSave = 1234;
+
+//   console.log(newSave);
+
+//   myLists.books.item1 += newSave;
+
+//   localStorage.setItem("listsObj", JSON.stringify(myLists));
+// });
+
+// $.each(storageBlocks, function (key, value) {
+//   console.log(key, value);
+
+//   $("#" + key + "t").val(value);
+// });
