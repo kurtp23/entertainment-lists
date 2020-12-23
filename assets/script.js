@@ -14,15 +14,16 @@ function displayBooks() {
 
     response.items.forEach(function (value, index) {
       displayCards(value, index);
-      $("#resultsContainer").on("click", ".save1", function () {
-        var newSave = response.items[$(this).attr("data-id")];
+    });
+    $(".save1").on("click", function () {
+      var newSave = response.items[$(this).attr("data-id")].volumeInfo;
 
-        console.log(newSave);
+      console.log(newSave);
 
-        myLists.books += newSave;
+      myLists.books.push(JSON.stringify(newSave));
 
-        localStorage.setItem("listsObj", JSON.stringify(myLists));
-      });
+      localStorage.setItem("listsObj", JSON.stringify(myLists));
+      console.log(myLists);
     });
   });
 }
@@ -196,34 +197,5 @@ const lists = {
 if (localStorage.getItem("listsObj") === null) {
   localStorage.setItem("listsObj", JSON.stringify(lists));
 }
-const myLists = JSON.parse(localStorage.getItem("listsObj"));
+var myLists = JSON.parse(localStorage.getItem("listsObj"));
 console.log(myLists);
-// console.log(myLists);
-
-// $(".save1").on("click", function () {
-//   var newSave = 1234;
-
-//   console.log(newSave);
-
-//   myLists.books.item1 += newSave;
-//   // var blockText = storageBlocks[blockKey];
-//   // console.log(blockText);
-
-//   localStorage.setItem("listsObj", JSON.stringify(myLists));
-// });
-
-// $("#resultsContainer").on("click", ".save1", function () {
-//   var newSave = 1234;
-
-//   console.log(newSave);
-
-//   myLists.books.item1 += newSave;
-
-//   localStorage.setItem("listsObj", JSON.stringify(myLists));
-// });
-
-// $.each(storageBlocks, function (key, value) {
-//   console.log(key, value);
-
-//   $("#" + key + "t").val(value);
-// });
