@@ -108,21 +108,21 @@ $('#booksDropdown').click(function(){
   var booksHtml = `
   <h3>My Books</h3>
   `
-  $('body').append(booksHtml)
+  $('.results').html(booksHtml)
 })
 
 $('#moviesDropdown').click(function(){
   var moviesHtml = `
   <h3>My Movies</h3>
   `
-  $('body').append(moviesHtml)
+  $('.results').html(moviesHtml)
 })
 
 $('#videoGamesDropdown').click(function(){
   var videoGamesHtml = `
   <h3>My Video Games</h3>
   `
-  $('body').append(videoGamesHtml)
+  $('.results').html(videoGamesHtml)
 })
 
 function displayCards(cardInfo) {
