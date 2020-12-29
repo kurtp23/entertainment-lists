@@ -11,7 +11,7 @@ function displayBooks() {
   }).then(function (response) {
     console.log("books", response);
     // console.log(response.items.length);
-
+    $("#newResult").html("");
     response.items.forEach(function (value, index) {
       displayCards(value, index);
     });
@@ -43,6 +43,7 @@ function displayGames() {
 
   $.ajax(settings).then(function (response) {
     console.log(response);
+    $("#newResult").html("");
     response.results.forEach(function (value, index) {
       displayGameCards(value, index);
     });
@@ -77,6 +78,7 @@ function displayMovies() {
     url: queryURL3 + movieTitle + key3,
     method: "GET",
   }).then(function (response) {
+    $("#newResult").html("");
     response.Search.forEach(function (value, index) {
       displayMovieCards(value, index);
     });
@@ -163,7 +165,7 @@ function displayCards(cardInfo, id) {
           
   `;
 
-  $(".results").append(cardHtml);
+  $("#newResult").prepend(cardHtml);
 }
 function displayGameCards(cardInfo, id) {
   // console.log(cardInfo);
@@ -189,7 +191,7 @@ function displayGameCards(cardInfo, id) {
           
   `;
 
-  $(".results").append(cardHtml);
+  $("#newResult").append(cardHtml);
 }
 function displayMovieCards(cardInfo, id) {
   // console.log(cardInfo);
@@ -213,7 +215,7 @@ function displayMovieCards(cardInfo, id) {
           
   `;
 
-  $(".results").append(cardHtml);
+  $("#newResult").append(cardHtml);
 }
 
 //========================================================
