@@ -237,6 +237,7 @@ $("#videoGames").on("click", function () {
 });
 // adds 3 divs for each list
 $("#list").on("click", function () {
+  $("#newResult").empty();
   var myLists = localRead();
 
   console.log("this is an object", myLists.books[0]);
