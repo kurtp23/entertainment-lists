@@ -1,9 +1,34 @@
 var key = "AIzaSyDTBCUxVbL39WQeQqdnu6uFJ5t5a2989_s";
-var search = "";
-queryURL = "https://www.googleapis.com/books/v1/volumes?q=";
-// function to search through books
+
+var queryURL = "https://www.googleapis.com/books/v1/volumes?q=";
+var queryURL3 = "https://www.omdbapi.com/?s=";
+var key3 = "&apikey=trilogy";
+var movieTitle = "";
+/**checks cocal storage, and if empty sets listsObj */
+function checkStorage() {
+  const lists = {
+    books: [],
+    movies: [],
+    videoGames: [],
+  };
+  if (localStorage.getItem("listsObj") === null) {
+    localStorage.setItem("listsObj", JSON.stringify(lists));
+  }
+}
+/**reads from listsObj local storage
+ * @returns {object} object information from listsObj loacal storage
+ */
+function localRead() {
+  return JSON.parse(localStorage.getItem("listsObj"));
+}
+/**sets an item to local storage
+ * @param {object}
+ */
+function localWrite(data) {
+  localStorage.setItem("listsObj", JSON.stringify(data));
+}
 function displayBooks() {
-  search = $("#search").val().trim();
+  var search = $("#search").val();
   // Creates AJAX call for google books api
   $.ajax({
     url: queryURL + search,
@@ -11,25 +36,28 @@ function displayBooks() {
   }).then(function (response) {
     console.log("books", response);
     // console.log(response.items.length);
-    $("#newResult").html("");
+    $("#newResult").empty();
     response.items.forEach(function (value, index) {
       displayCards(value, index);
     });
     $(".save1").on("click", function () {
+      var myLists = localRead();
       var newSave = response.items[$(this).attr("data-id")].volumeInfo;
+      var saveBook = {
+        title: newSave.title,
+        authors: newSave.authors,
+        imageLinks: newSave.imageLinks,
+      };
+      console.log("this is the saved book", saveBook);
 
-      console.log(newSave);
+      myLists.books.push(saveBook);
 
-      myLists.books.push(JSON.stringify(newSave));
-
-      localStorage.setItem("listsObj", JSON.stringify(myLists));
-      console.log(myLists);
+      localWrite(myLists);
     });
   });
 }
-
 function displayGames() {
-  search = $("#search").val().trim();
+  var search = $("#search").val().trim();
   const settings = {
     async: true,
     crossDomain: true,
@@ -43,29 +71,26 @@ function displayGames() {
 
   $.ajax(settings).then(function (response) {
     console.log(response);
-    $("#newResult").html("");
+    $("#newResult").empty();
     response.results.forEach(function (value, index) {
       displayGameCards(value, index);
     });
     $(".save1").on("click", function () {
+      var myLists = localRead();
       var newSave = response.results[$(this).attr("data-id")];
 
-      console.log(newSave);
+      var saveGame = {
+        title: newSave.name,
+        rating: "Rating is: " + myLists.rating + " out of " + myLists.rating_top,
+        imageLinks: newSave.background_image,
+      };
+      console.log("this is the saved game", saveGame);
+      myLists.videoGames.push(saveGame);
 
-      myLists.videoGames.push(JSON.stringify(newSave));
-
-      localStorage.setItem("listsObj", JSON.stringify(myLists));
-      console.log(myLists);
+      localWrite(myLists);
     });
   });
 }
-const queryURL3 = "https://www.omdbapi.com/?s=";
-const key3 = "&apikey=trilogy";
-var movieTitle = "";
-
-// console.log(queryURL3 + movieTitle + key3);
-
-//-------------------------------------------------------
 
 // Function to search for movies
 
@@ -78,69 +103,26 @@ function displayMovies() {
     url: queryURL3 + movieTitle + key3,
     method: "GET",
   }).then(function (response) {
-    $("#newResult").html("");
+    $("#newResult").empty();
     response.Search.forEach(function (value, index) {
       displayMovieCards(value, index);
     });
     $(".save1").on("click", function () {
+      var myLists = localRead();
+
       var newSave = response.Search[$(this).attr("data-id")];
+      var saveMovie = {
+        title: newSave.Title,
+        // authors: newSave.authors,
+        imageLinks: newSave.Poster,
+      };
+      console.log("this is the saved Movie", saveMovie);
+      myLists.movies.push(saveMovie);
 
-      console.log(newSave);
-
-      myLists.movies.push(JSON.stringify(newSave));
-
-      localStorage.setItem("listsObj", JSON.stringify(myLists));
-      console.log(myLists);
+      localWrite(myLists);
     });
   });
 }
-
-// click handler to run when add input and search button when clicked
-$("#books").on("click", function () {
-  var searchDiv = $("<div>");
-  var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $(
-    "<button class = 'waves-effect deep-orange lighten-4 btn'>search books</button>"
-  ).attr("id", "searchBtn");
-  $(searchDiv).append(inputField, searchButton);
-  $(".results").html(searchDiv);
-  // runs google books api function to search through books
-  $("#searchBtn").on("click", displayBooks);
-});
-// click handler to run when add input and search button when clicked
-$("#movies").on("click", function () {
-  var searchDiv = $("<div>");
-  var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $(
-    "<button class = 'waves-effect deep-orange lighten-4 btn'>search movies</button>"
-  ).attr("id", "searchBtn");
-  $(searchDiv).append(inputField, searchButton);
-  $(".results").html(searchDiv);
-
-  $("#searchBtn").on("click", displayMovies);
-});
-// click handler to run when add input and search button when clicked
-$("#videoGames").on("click", function () {
-  var searchDiv = $("<div>");
-  var inputField = $("<input></input>").attr("id", "search");
-  var searchButton = $(
-    "<button class = 'waves-effect deep-orange lighten-4 btn'>search video games</button>"
-  ).attr("id", "searchBtn");
-  $(searchDiv).append(inputField, searchButton);
-  $(".results").html(searchDiv);
-
-  $("#searchBtn").on("click", displayGames);
-});
-// adds 3 divs for each list
-$("#list").on("click", function () {
-  var div1 = $("<div>").html("books");
-  var div2 = $("<div>").html("movies");
-  var div3 = $("<div>").html("video games");
-  var contain = $("<div>").append(div1, div2, div3);
-
-  $(".results").html(contain);
-});
-
 function displayCards(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
@@ -217,16 +199,54 @@ function displayMovieCards(cardInfo, id) {
 
   $("#newResult").append(cardHtml);
 }
+// click handler to run when add input and search button when clicked
+$("#books").on("click", function () {
+  var searchDiv = $("<div>");
+  var inputField = $("<input></input>").attr("id", "search");
+  var searchButton = $(
+    "<button class = 'waves-effect deep-orange lighten-4 btn'>search books</button>"
+  ).attr("id", "searchBtn");
+  $(searchDiv).append(inputField, searchButton);
+  $(".results").html(searchDiv);
+  // runs google books api function to search through books
+  $("#searchBtn").on("click", displayBooks);
+});
+// click handler to run when add input and search button when clicked
+$("#movies").on("click", function () {
+  var searchDiv = $("<div>");
+  var inputField = $("<input></input>").attr("id", "search");
+  var searchButton = $(
+    "<button class = 'waves-effect deep-orange lighten-4 btn'>search movies</button>"
+  ).attr("id", "searchBtn");
+  $(searchDiv).append(inputField, searchButton);
+  $(".results").html(searchDiv);
+
+  $("#searchBtn").on("click", displayMovies);
+});
+// click handler to run when add input and search button when clicked
+$("#videoGames").on("click", function () {
+  var searchDiv = $("<div>");
+  var inputField = $("<input></input>").attr("id", "search");
+  var searchButton = $(
+    "<button class = 'waves-effect deep-orange lighten-4 btn'>search video games</button>"
+  ).attr("id", "searchBtn");
+  $(searchDiv).append(inputField, searchButton);
+  $(".results").html(searchDiv);
+
+  $("#searchBtn").on("click", displayGames);
+});
+// adds 3 divs for each list
+$("#list").on("click", function () {
+  var myLists = localRead();
+
+  console.log("this is an object", myLists.books[0]);
+  var div1 = $("<div>").html("books");
+  var div2 = $("<div>").html("movies");
+  var div3 = $("<div>").html("video games");
+  var contain = $("<div>").append(div1, div2, div3);
+
+  $(".results").html(contain);
+});
 
 //========================================================
-
-const lists = {
-  books: [],
-  movies: [],
-  videoGames: [],
-};
-if (localStorage.getItem("listsObj") === null) {
-  localStorage.setItem("listsObj", JSON.stringify(lists));
-}
-var myLists = JSON.parse(localStorage.getItem("listsObj"));
-console.log(myLists);
+checkStorage();
