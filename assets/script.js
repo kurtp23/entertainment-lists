@@ -304,3 +304,4 @@ function displayCards(cardInfo) {
 
 //========================================================
 checkStorage();
+//working js file test
