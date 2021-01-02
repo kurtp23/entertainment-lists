@@ -201,6 +201,7 @@ function displayMovieCards(cardInfo, id) {
 }
 // click handler to run when add input and search button when clicked
 $("#books").on("click", function () {
+  $("#newResult").empty();
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $(
@@ -213,6 +214,7 @@ $("#books").on("click", function () {
 });
 // click handler to run when add input and search button when clicked
 $("#movies").on("click", function () {
+  $("#newResult").empty();
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $(
@@ -225,6 +227,7 @@ $("#movies").on("click", function () {
 });
 // click handler to run when add input and search button when clicked
 $("#videoGames").on("click", function () {
+  $("#newResult").empty();
   var searchDiv = $("<div>");
   var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $(
