@@ -147,7 +147,7 @@ function displayCards(cardInfo, id) {
           
   `;
 
-  $("#newResult").prepend(cardHtml);
+  $("#newResult").append(cardHtml);
 }
 function displayGameCards(cardInfo, id) {
   // console.log(cardInfo);
@@ -302,7 +302,7 @@ function displayGameCardsStorage(cardInfo, id) {
           
   `;
 
-  $("#newResult").append(cardHtml);
+  $("#newResult").prepend(cardHtml);
 }
 function displayMovieCardsStorage(cardInfo, id) {
   // console.log(cardInfo);
@@ -326,7 +326,7 @@ function displayMovieCardsStorage(cardInfo, id) {
           
   `;
 
-  $("#newResult").append(cardHtml);
+  $("#newResult").prepend(cardHtml);
 }
 
 $(".dropdown-trigger").dropdown();
