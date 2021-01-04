@@ -131,7 +131,9 @@ function displayCards(cardInfo, id) {
   <div class="col s3 m3">
   <div class="card ">
   <div class="card-image">
-  <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
+  <img id="bookImg" src="${
+    cardInfo.volumeInfo.imageLinks ? cardInfo.volumeInfo.imageLinks.thumbnail : "no image"
+  }">
  
   <a class="btn-floating halfway-fab waves-effect waves-light red save1"data-id="${id}"><i class="material-icons">add</i></a>
   </div>
@@ -259,7 +261,7 @@ function displayCardsStorage(cardInfo, id) {
   <div class="col s3 m3">
   <div class="card ">
   <div class="card-image">
-  <img id="bookImg" src="${cardInfo.imageLinks.thumbnail}">
+  <img id="bookImg" src="${cardInfo.imageLinks ? cardInfo.imageLinks.thumbnail : "no image"}">
  
   <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
   </div>
