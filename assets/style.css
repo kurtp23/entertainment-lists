@@ -27,7 +27,9 @@
   width: 30%;
   align-self: center;
 }
-
+.newResult {
+  display: flex;
+}
 #movieImg {
   height: 192px;
   width: 128px;
@@ -63,3 +65,7 @@ h3 {
   color: white;
 }
 /* working css file */
+@media (max-width: 1000px) {
+  .display {
+  }
+}

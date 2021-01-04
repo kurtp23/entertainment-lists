@@ -128,7 +128,7 @@ function displayMovies() {
 function displayCards(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
-  <div class="col s3 m3">
+  <div class="col s12 m6 l3">
   <div class="card ">
   <div class="card-image">
   <img id="bookImg" src="${
@@ -157,7 +157,7 @@ function displayCards(cardInfo, id) {
 function displayGameCards(cardInfo, id) {
   console.log(cardInfo);
   var cardHtml = `
-  <div class="col s3 m3">
+  <div class="col s12 m6 l3">
   <div class="card ">
   <div class="card-image">
   <img id="gameImg" src="${cardInfo.background_image}">
@@ -184,7 +184,7 @@ function displayGameCards(cardInfo, id) {
 function displayMovieCards(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
-  <div class="col s3 m3">
+  <div class="col s12 m6 l3">
   <div class="card ">
   <div class="card-image">
   <img id="movieImg" src="${cardInfo.Poster}">
@@ -258,10 +258,12 @@ function displayCardsStorage(cardInfo, id) {
   // console.log(cardInfo);
 
   var cardHtml = `
-  <div class="col s3 m3">
+  <div class="col s12 m6 l3">
   <div class="card ">
   <div class="card-image">
-  <img id="bookImg" src="${cardInfo.imageLinks ? cardInfo.imageLinks.thumbnail : "no image"}">
+  <img id="bookImg" class="responsive-img" src="${
+    cardInfo.imageLinks ? cardInfo.imageLinks.thumbnail : "no image"
+  }">
  
   <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
   </div>
@@ -284,10 +286,10 @@ function displayCardsStorage(cardInfo, id) {
 function displayGameCardsStorage(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
-  <div class="col s3 m3">
+  <div class="col s12 m6 l3">
   <div class="card ">
   <div class="card-image">
-  <img id="gameImg" src="${cardInfo.imageLinks}">
+  <img id="gameImg"class="responsive-img" src="${cardInfo.imageLinks}">
  
   <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
   </div>
@@ -308,10 +310,10 @@ function displayGameCardsStorage(cardInfo, id) {
 function displayMovieCardsStorage(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
-  <div class="col s3 m3">
+  <div class="col s12 m6 l3">
   <div class="card ">
   <div class="card-image">
-  <img id="movieImg" src="${cardInfo.imageLinks}">
+  <img id="movieImg" class="responsive-img" src="${cardInfo.imageLinks}">
  
   <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
   </div>
