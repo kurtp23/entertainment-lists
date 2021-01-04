@@ -78,12 +78,13 @@ function displayGames() {
     $(".save1").on("click", function () {
       var myLists = localRead();
       var newSave = response.results[$(this).attr("data-id")];
-
+      console.log(myLists);
       var saveGame = {
         title: newSave.name,
-        rating: "Rating is: " + myLists.rating + " out of " + myLists.rating_top,
+        rating: "Rating is: " + newSave.rating + " out of " + newSave.rating_top,
         imageLinks: newSave.background_image,
       };
+      console.log(saveGame);
       console.log("this is the saved game", saveGame);
       myLists.videoGames.push(saveGame);
 
@@ -123,6 +124,7 @@ function displayMovies() {
     });
   });
 }
+// function to create cards for books
 function displayCards(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
@@ -147,10 +149,11 @@ function displayCards(cardInfo, id) {
           
   `;
 
-  $("#newResult").prepend(cardHtml);
+  $("#newResult").append(cardHtml);
 }
+// function to create cards for games
 function displayGameCards(cardInfo, id) {
-  // console.log(cardInfo);
+  console.log(cardInfo);
   var cardHtml = `
   <div class="col s3 m3">
   <div class="card ">
@@ -175,6 +178,7 @@ function displayGameCards(cardInfo, id) {
 
   $("#newResult").append(cardHtml);
 }
+// function to create cards for movies
 function displayMovieCards(cardInfo, id) {
   // console.log(cardInfo);
   var cardHtml = `
@@ -200,8 +204,9 @@ function displayMovieCards(cardInfo, id) {
   $("#newResult").append(cardHtml);
 }
 // click handler to run when add input and search button when clicked
-$("#books").on("click", function () {
-  var searchDiv = $("<div>");
+$(".books").on("click", function () {
+  $("#newResult").empty();
+  var searchDiv = $("<div>").attr("class", "searchDiv col s6 offset-s3");
   var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $(
     "<button class = 'waves-effect deep-orange lighten-4 btn'>search books</button>"
@@ -212,8 +217,9 @@ $("#books").on("click", function () {
   $("#searchBtn").on("click", displayBooks);
 });
 // click handler to run when add input and search button when clicked
-$("#movies").on("click", function () {
-  var searchDiv = $("<div>");
+$(".movies").on("click", function () {
+  $("#newResult").empty();
+  var searchDiv = $("<div>").attr("class", "searchDiv col s6 offset-s3");
   var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $(
     "<button class = 'waves-effect deep-orange lighten-4 btn'>search movies</button>"
@@ -224,8 +230,9 @@ $("#movies").on("click", function () {
   $("#searchBtn").on("click", displayMovies);
 });
 // click handler to run when add input and search button when clicked
-$("#videoGames").on("click", function () {
-  var searchDiv = $("<div>");
+$(".videoGames").on("click", function () {
+  $("#newResult").empty();
+  var searchDiv = $("<div>").attr("class", "searchDiv col s6 offset-s3");
   var inputField = $("<input></input>").attr("id", "search");
   var searchButton = $(
     "<button class = 'waves-effect deep-orange lighten-4 btn'>search video games</button>"
@@ -235,73 +242,141 @@ $("#videoGames").on("click", function () {
 
   $("#searchBtn").on("click", displayGames);
 });
-// adds 3 divs for each list
+// event for dropdown
 $("#list").on("click", function () {
-  var div1 = $("<div>").html("");
-  var div2 = $("<div>").html("");
-  var div3 = $("<div>").html("");
-  $("#newResult").empty();
+  // $("#newResult").empty();
   var myLists = localRead();
 
   console.log("this is an object", myLists.books[0]);
-  var div1 = $("<div>").html("books");
-  var div2 = $("<div>").html("movies");
-  var div3 = $("<div>").html("video games");
-  var contain = $("<div>").append(div1, div2, div3);
 
-  $(".results").html(contain);
+  // $(".results").html(contain);
 });
 
-$('.dropdown-trigger').dropdown();
+function displayCardsStorage(cardInfo, id) {
+  // console.log(cardInfo);
 
-$('#booksDropdown').click(function(){
-  var booksHtml = `
-  <h3>My Books</h3>
-  `
-  $('.results').html(booksHtml)
-})
-
-$('#moviesDropdown').click(function(){
-  var moviesHtml = `
-  <h3>My Movies</h3>
-  `
-  $('.results').html(moviesHtml)
-})
-
-$('#videoGamesDropdown').click(function(){
-  var videoGamesHtml = `
-  <h3>My Video Games</h3>
-  `
-  $('.results').html(videoGamesHtml)
-})
-
-function displayCards(cardInfo) {
-  console.log(cardInfo);
   var cardHtml = `
   <div class="col s3 m3">
   <div class="card ">
   <div class="card-image">
-  <a class="btn-floating btn-large waves-effect deep-orange lighten-4"><i class="material-icons">add</i></a>
-  <img id="bookImg" src="${cardInfo.volumeInfo.imageLinks.thumbnail}">
+  <img id="bookImg" src="${cardInfo.imageLinks.thumbnail}">
+ 
+  <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
   </div>
   <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4" style = 'padding-left: 10%'>Book Info<i class="material-icons right">more_vert</i></span>
-    
+    <span class="card-title activator grey-text text-darken-4">Book Info<i class="material-icons right">more_vert</i></span>
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">${
-      cardInfo.volumeInfo.title
+      cardInfo.title
     }<i class="material-icons right">close</i></span>
-    <p>${cardInfo.volumeInfo.authors ? cardInfo.volumeInfo.authors.join(", ") : "no author"}</p>
+    <p>${cardInfo.authors ? cardInfo.authors.join(", ") : "no author"}</p>
   </div>
 </div>
 </div>
           
   `;
 
-  $(".results").append(cardHtml);
+  $("#newResult").prepend(cardHtml);
+}
+function displayGameCardsStorage(cardInfo, id) {
+  // console.log(cardInfo);
+  var cardHtml = `
+  <div class="col s3 m3">
+  <div class="card ">
+  <div class="card-image">
+  <img id="gameImg" src="${cardInfo.imageLinks}">
+ 
+  <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">Game Info<i class="material-icons right">more_vert</i></span>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">${cardInfo.title}<i class="material-icons right">close</i></span>
+    <p>${cardInfo.rating}</p>
+  </div>
+</div>
+</div>
+          
+  `;
+
+  $("#newResult").prepend(cardHtml);
+}
+function displayMovieCardsStorage(cardInfo, id) {
+  // console.log(cardInfo);
+  var cardHtml = `
+  <div class="col s3 m3">
+  <div class="card ">
+  <div class="card-image">
+  <img id="movieImg" src="${cardInfo.imageLinks}">
+ 
+  <a class="btn-floating halfway-fab waves-effect waves-light red clear1"data-id="${id}"><i class="material-icons">clear</i></a>
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">Movie Info<i class="material-icons right">more_vert</i></span>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">${cardInfo.title}<i class="material-icons right">close</i></span>
+    <p></p>
+  </div>
+</div>
+</div>
+          
+  `;
+
+  $("#newResult").prepend(cardHtml);
 }
 
+$(".dropdown-trigger").dropdown();
+$(".sidenav").sidenav();
+
+// handles books dropdown
+$("#booksDropdown").click(function () {
+  var myLists = localRead();
+  $("#newResult").empty();
+  $("#results").empty();
+  var booksHtml = `
+  <h3>My Books</h3>
+
+  `;
+
+  myLists.books.forEach(function (value, index) {
+    displayCardsStorage(value, index);
+  });
+  $(".results").html(booksHtml);
+
+  console.log(myLists.books);
+});
+
+// handles movies drop down
+$("#moviesDropdown").click(function () {
+  var myLists = localRead();
+  $("#newResult").empty();
+  $("#results").empty();
+  var moviesHtml = `
+  <h3>My Movies</h3>
+  `;
+  myLists.movies.forEach(function (value, index) {
+    displayMovieCardsStorage(value, index);
+  });
+  $(".results").html(moviesHtml);
+});
+// handles games drop down
+$("#videoGamesDropdown").click(function () {
+  var myLists = localRead();
+  $("#newResult").empty();
+  $("#results").empty();
+  var videoGamesHtml = `
+  <h3>My Video Games</h3>
+  `;
+  myLists.videoGames.forEach(function (value, index) {
+    displayGameCardsStorage(value, index);
+  });
+  $(".results").html(videoGamesHtml);
+});
+
 //========================================================
+// checks the storage when page is loaded
 checkStorage();
 //working js file test
