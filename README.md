@@ -6,7 +6,7 @@ EList is a website that allows users to store books, movies, and video games the
 
 Follow the link below to open the webpage for the EList website.
 
-<a href="https://github.com/kurtp23/entertainment-lists"> https://github.com/kurtp23/entertainment-lists </a>
+<a href="https://kurtp23.github.io/entertainment-lists/"> https://kurtp23.github.io/entertainment-lists/ </a>
 
 ## Usage 
 
