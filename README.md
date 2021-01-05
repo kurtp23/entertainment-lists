@@ -1,10 +1,10 @@
 ## Project-1
 
-E-List is a website that allows users to store books, movies, and video games they may want to watch to sorted lists.
+EList is a website that allows users to store books, movies, and video games they may want to watch to sorted lists.
 
 ## Installation
 
-Follow the link below to open the webpage for the E-List website.
+Follow the link below to open the webpage for the EList website.
 
 ```bash
 https://kurtp23.github.io/project-1/
@@ -12,10 +12,9 @@ https://kurtp23.github.io/project-1/
 
 ## Usage 
 
-By clicking the links in the navigation bar on the top of the page, it will direct clients to the sections below.
+On the top left corner of the page, users can select if they want to search for a book, movie or video game. Once clicked, it takes them to the search bar.
 
-
-![]()
+![Search Bar](https://github.com/kurtp23/project-1/blob/readMe/readMePictures/Screen%20Shot%202021-01-04%20at%2012.22.57%20PM.png)
 
 The links titled "Search Engine Optimization" and "Online Reputation Management" will direct clients to the sections midway down the page.
 
