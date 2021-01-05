@@ -6,9 +6,7 @@ EList is a website that allows users to store books, movies, and video games the
 
 Follow the link below to open the webpage for the EList website.
 
-```bash
-https://github.com/kurtp23/entertainment-lists
-```
+<a href="https://kurtp23.github.io/entertainment-lists/"> https://kurtp23.github.io/entertainment-lists/ </a>
 
 ## Usage 
 
@@ -30,32 +28,18 @@ After the user has selected a list, they can view all movies, books, or video ga
 
 We utilized 3 different APIs for this website listed below.
 
-```bash
-https://developers.google.com/books/docs/v1/using
-```
+<a href="https://developers.google.com/books/docs/v1/using"> https://developers.google.com/books/docs/v1/using </a>
 
-```bash
-http://www.omdbapi.com/
-```
+<a href="http://www.omdbapi.com/"> http://www.omdbapi.com/ </a>
 
-```bash
-https://rawg.io/apidocs
-```
+<a href="https://rawg.io/apidocs"> https://rawg.io/apidocs </a>
 
 ## Contributors
 
-```bash
-Kurt Phillips: https://github.com/kurtp23
-```
+Kurt Phillips: <a href="https://github.com/kurtp23"> https://github.com/kurtp23 </a>
 
-```bash
-Rebecca Howe: https://github.com/rhowe20
-```
+Rebecca Howe: <a href="https://github.com/rhowe20"> https://github.com/rhowe20 </a>
 
-```bash
-Kyle Gates: https://github.com/Al0haRussia
-```
+Kyle Gates:<a href ="https://github.com/Al0haRussia"> https://github.com/Al0haRussia </a>
 
-```bash
-Ruben Sainz Linarez: https://github.com/rsainzlinarez
-```
+Ruben Sainz Linarez: <a href="https://github.com/rsainzlinarez"> https://github.com/rsainzlinarez </a>
