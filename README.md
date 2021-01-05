@@ -42,6 +42,20 @@ http://www.omdbapi.com/
 https://rawg.io/apidocs
 ```
 
-## Updates
+## Contributors
 
+```bash
+Kurt Phillips: https://github.com/kurtp23
+```
 
+```bash
+Rebecca Howe: https://github.com/rhowe20
+```
+
+```bash
+Kyle Gates: https://github.com/Al0haRussia
+```
+
+```bash
+Ruben Sainz Linarez: https://github.com/rsainzlinarez
+```
