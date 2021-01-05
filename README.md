@@ -20,11 +20,27 @@ Once a movie is searched, the website will display 10 options for the user to ch
 
 ![Movies Library](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/searched.%20movies.png) 
 
-![My List Dropdown](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/go%20to%20movies%20library.png)
-
 After the user has selected a list, they can view all movies, books, or video games that they have chosen from the AIP libraries.
 
+![My List Dropdown](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/go%20to%20movies%20library.png)
+
 ![My List](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/movies%20added.png)
+
+## API References
+
+We utilized 3 different APIs for this website listed below.
+
+```bash
+https://developers.google.com/books/docs/v1/using
+```
+
+```bash
+http://www.omdbapi.com/
+```
+
+```bash
+https://rawg.io/apidocs
+```
 
 ## Updates
 
