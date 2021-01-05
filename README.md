@@ -16,18 +16,16 @@ On the top left corner of the page, users can select if they want to search for 
 
 ![Search Bar](https://github.com/kurtp23/project-1/blob/readMe/readMePictures/Screen%20Shot%202021-01-04%20at%2012.22.57%20PM.png)
 
-The links titled "Search Engine Optimization" and "Online Reputation Management" will direct clients to the sections midway down the page.
+Once a movie is searched, the website will display 10 options for the user to choose from. When they find something they like, they can add it to their list by pressing the red plus button on the right corner of each card.
 
-![]() 
+![Movies Library](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/searched.%20movies.png) 
 
-The "Social Media Marketing" link will then direct clients to the bottom of the page.
+![My List Dropdown](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/go%20to%20movies%20library.png)
 
-![]()
+After the user has selected a list, they can view all movies, books, or video games that they have chosen from the AIP libraries.
+
+![My List](https://github.com/kurtp23/entertainment-lists/blob/readMe/readMePictures/movies%20added.png)
 
 ## Updates
 
-The first correction made were to the broken links directing clients to the different sections to the page. 
 
-The HTML is now formatted using symantic elements rather than using straight div.
-
-CSS has been condensed to be more concise when reading the code.
